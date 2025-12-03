@@ -1,0 +1,30 @@
+# .gitignore
+
+secrets*
+
+# CPy stuff
+/boot_out.txt
+/.Trash-1000
+/.Trashes
+/.fseventsd/
+/.metadata_never_index
+
+# OS cruft
+/System Volume Information/
+/$RECYCLE.BIN/
+__pycache__/
+
+# temporary files
+**.log
+**.swp
+**~
+
+# mew's temporary
+HIDE/
+PRINT
+grep_*txt
+REFRESH.sh.bak
+liblist.txt
+RELEASE.txt
+
+# eof

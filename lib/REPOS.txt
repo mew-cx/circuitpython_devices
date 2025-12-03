@@ -1,0 +1,3 @@
+github.com/adafruit/Adafruit_CircuitPython_Bundle
+github.com/kevinjwalters/Adafruit_CircuitPython_SPS30 4c93e67
+github.com/mew-cx/CircuitPython_rfc5424 a98255b

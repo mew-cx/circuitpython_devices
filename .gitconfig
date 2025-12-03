@@ -1,0 +1,12 @@
+# github.com/mew-cx/CircuitPython_dust_wx_station/.gitconfig
+# Author: Mike Weiblen <mew@mew.cx>
+# Tweaks for this repo to work across platforms
+
+[core]
+	fileMode = false
+
+[safe]
+#	directory = *
+
+# vim: set noet ic ai:
+

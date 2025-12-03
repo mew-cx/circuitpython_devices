@@ -1,0 +1,131 @@
+=============================================================================
+2025-08-29
+migrating from feather_esp32s2 to raspberry_pi_w
+migrating to circuitpython 9.2.8
+
+Auto-reload is on. Simply save files over USB to run them or enter REPL to disable.
+code.py output:
+Traceback (most recent call last):
+  File "code.py", line 4, in <module>
+  File "main.py", line 207, in <module>
+  File "main.py", line 90, in InitializeDevices
+AttributeError: 'module' object has no attribute 'SCK'
+
+=============================================================================
+Start/Stop the SPS30 (run for 30 seconds before recording a measurement.)
+
+Start/Stop socket
+
+Start/Stop wifi connection?
+
+unpower D13 led, external i2c power.  disable board.NEOPIXEL_POWER
+
+use watchdog to ensure running?
+
+use deep sleep to save power?  sleep the SPS30
+
+check on mpl read protocol, to ensure it doesn't block.
+
+TODO what other shutdown tasks?
+TODO prepare to sleep
+TODO wake up from sleep
+TODO periodic fan cleaning
+
+in the header:
+    board.board_id
+    CPy version
+    microcontroller_id
+    dust version
+
+what's a good way to generate build_timestamp (date, g desc)
+=============================================================================
+
+>>> import microcontroller
+>>> dir(microcontroller)
+['__class__', '__name__', 'Pin', 'Processor', 'ResetReason', 'RunMode', 'cpu', 'delay_us', 'disable_interrupts', 'enable_interrupts', 'nvm', 'on_next_reset', 'pin', 'reset', 'watchdog']
+
+>>> dir(microcontroller.watchdog)
+['__class__', 'deinit', 'feed', 'mode', 'timeout']
+>>> help(microcontroller.watchdog)
+object <WatchDogTimer> is of type WatchDogTimer
+feed -- <function>
+deinit -- <function>
+timeout -- <property>
+mode -- <property>
+
+>>> import watchdog
+>>> dir(watchdog)
+['__class__', '__name__', 'WatchDogMode', 'WatchDogTimeout']
+>>> help(watchdog)
+object <module 'watchdog'> is of type module
+__name__ -- watchdog
+WatchDogMode -- <class 'WatchDogMode'>
+WatchDogTimeout -- <class 'WatchDogTimeout'>
+
+>>> microcontroller.cpu.uid
+bytearray(b'\xc7\xfd\x1aI\xb8g')
+>>> microcontroller.cpu.temperature
+39.4348
+>>> microcontroller.cpu.reset_reason
+microcontroller.ResetReason.SOFTWARE
+>>> str(microcontroller.cpu.reset_reason)
+'microcontroller.ResetReason.SOFTWARE'
+
+=============================================================================
+Catch network exceptions.  When modem was rebooted...
+# TODO handle ECONNECT exception
+
+b'<158>1 2022-07-08T03:31:32Z 192.168.1.65 dust - - - "2022-07-08T03:31:32Z",15.5,68.7,74535,0.464,1.0,1.0,1.0,1.0,7,8,8,8,8'
+b'<158>1 2022-07-08T03:36:33Z - dust - - - "2022-07-08T03:36:33Z",15.3,69.3,74547,0.474,0.9,1.0,1.0,1.0,6,7,7,7,7'
+Traceback (most recent call last):
+  File "code.py", line 4, in <module>
+  File "main.py", line 212, in <module>
+  File "main.py", line 149, in WriteCsvData
+  File "main.py", line 134, in WriteToSyslog
+OSError: [Errno 113] ECONNABORTED
+
+Code done running.
+
+=============================================================================
+
+code.py output:
+connecting to AP e7
+Traceback (most recent call last):
+  File "code.py", line 4, in <module>
+  File "main.py", line 199, in <module>
+  File "main.py", line 117, in ConnectToAP
+  File "/lib/wifi_socket.py", line 27, in ConnectToAP
+ConnectionError: No network with that ssid
+"wifi.radio.connect('foo', password)"
+
+Code done running.
+
+=============================================================================
+
+Auto-reload is on. Simply save files over USB to run them or enter REPL to disable.
+code.py output:
+connecting to AP e7
+self.ipaddr 192.168.1.65 (ours)
+Traceback (most recent call last):
+  File "code.py", line 4, in <module>
+  File "main.py", line 201, in <module>
+  File "main.py", line 121, in SocketToSyslog
+  File "/lib/wifi_socket.py", line 41, in ConnectToSocket
+OSError: [Errno 118] EHOSTUNREACH
+"sock.connect(('foo', port))"
+
+Code done running.
+
+=============================================================================
+
+b'<158>1 2022-07-10T22:56:29Z 192.168.1.65 dust - - - "2022-07-10T22:56:28Z",24.9,34.2,74529,0.491,1.1,1.2,1.2,1.2,8,9,9,9,9'
+Traceback (most recent call last):
+  File "code.py", line 4, in <module>
+  File "main.py", line 219, in <module>
+  File "main.py", line 126, in SocketToSyslog
+OSError: [Errno 118] EHOSTUNREACH
+"sock.connect((self.HOST, self.PORT))"
+
+Code done running.
+
+=============================================================================

@@ -1,0 +1,17 @@
+# settings.toml
+
+# WiFi access point
+CIRCUITPY_WIFI_SSID = "bhr22"
+CIRCUITPY_WIFI_PASSWORD = "the..daring..craccoon"
+
+# Syslog server to which we send reports
+DUST_SERVER_IPADDR = "192.168.8.12"     # pink
+DUST_SERVER_PORT = 514
+
+# delay [minutes] after sending each report
+DUST_SLEEP_MINS = 5
+
+# Brightness of the LEDs, 0 (off) to 100 (full) [uint]
+DUST_LED_BRIGHTNESS = 10
+
+#eof

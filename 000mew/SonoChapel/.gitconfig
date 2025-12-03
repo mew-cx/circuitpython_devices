@@ -1,0 +1,14 @@
+# .gitconfig
+
+[core]
+# Linux
+#	fileMode = true		; Linux obeys filemodes
+#	ignoreCase = false	; Linux obeys filename case-sensitivity
+#	symlinks = true		; Linux supports symlinks
+
+# Windows
+	fileMode = false	; Windows ignores filemodes
+	ignoreCase = true	; Windows ignores filename case-sensitivity
+	symlinks = false	; Windows ignores symlinks
+
+# eof
