@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2022-2023 Michael Weiblen http://mew.cx/
+# SPDX-FileCopyrightText: 2022-2024 Michael Weiblen http://mew.cx/
 #
 # SPDX-License-Identifier: MIT
 
@@ -7,8 +7,12 @@
 #
 # TODO micropython.mem_info() and micropython.mem_info(1)
 
-__version__ = "0.0.6.0"
-__repo__    = "https://github.com/mew-cx/CircuitPython_hinv"
+# About this code:
+__version__ = "0.0.8.0"
+__repo__ = "https://github.com/mew-cx/CircuitPython_hinv"
+__impl_name__ = "circuitpython"         # sys.implementation.name
+__impl_version__ = (9, 1, 1)            # sys.implementation.version
+__board_id__ = "*"                      # board.board_id
 
 import board
 import os
@@ -55,6 +59,8 @@ def FsInfo(path="/"):
     return (total, free)
 
 def GenerateResults(out):
+    out.write("filename : {}__{}__{}.txt\n\n".format(board.board_id, "0.0.0", AsciiHex(soc.cpu.uid)))
+
     out.write("hinv version : {}\t\trepo : {}\n".format(__version__, __repo__))
     out.write("board.board_id : {}\n".format(board.board_id))
     out.write("uid : {}\n".format(AsciiHex(soc.cpu.uid)))
@@ -70,7 +76,10 @@ def GenerateResults(out):
     except:
         pass
 
-    sys_mpy = sys.implementation.mpy
+    try:
+        sys_mpy = sys.implementation._mpy
+    except:
+        sys_mpy = sys.implementation.mpy
     out.write("sys.implementation : {} MPY_VERSION={:d} flags=0x{:02x} arch={:d}\n".format(
         sys.implementation, sys_mpy & 0xff, (sys_mpy >> 8) & 0xff, (sys_mpy >> 10) & 0xff))
 
@@ -111,8 +120,9 @@ def GenerateResults(out):
 
     out.write("help('modules') {\n")
     help('modules')
-    out.write("# TODO how to redirect help('modules') to output filehandle?\n")
     out.write("}\n")
+
+#############################################################################
 
 def main():
     try:
@@ -139,4 +149,4 @@ main()
 #out.write("os.stat(/code.py) : {}\n".format(os.stat("/code.py")))
 #out.write("os.sep : {}\n".format(os.sep))
 
-# eof
+# vim: set sw=4 ts=8 et ic ai:
