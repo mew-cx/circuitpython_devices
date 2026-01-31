@@ -1,0 +1,124 @@
+# SPDX-FileCopyrightText: 2022 Michael Weiblen http://mew.cx/
+#
+# SPDX-License-Identifier: MIT
+
+# hpdl.py
+
+__version__ = "0.0.0.3"
+__repo__ = "https://github.com/mew-cx/CircuitPython_smart_display"
+
+import board
+import digitalio
+import time
+import microcontroller
+
+#import mew_pinbus
+
+#import busio
+#import atexit
+#import gc
+#import sys
+
+#############################################################################
+
+class PinBus:
+    def __init__(self, board_pins):
+        self._pins = tuple([self._init_pin(i) for i in board_pins])
+        self._value = 0
+
+    def _init_pin(self, board_pin):
+        pin = digitalio.DigitalInOut(board_pin)
+        pin.switch_to_output()
+        return pin
+
+    def deinit(self):
+        [pin.deinit() for pin in self._pins]
+
+    @property
+    def value(self):
+        """Return the last value written to pins"""
+        return self._value
+
+    @value.setter
+    def value(self, value):
+        """Write value to the pins"""
+        for pin in self._pins:
+            pin.value = bool(value & 0x01)
+            value >>= 1
+        self._value = value
+
+#############################################################################
+
+class HPDL1414:
+    ADDR_BITS = 2
+    DATA_BITS = 2 #7
+
+    def __init__(self, addr_pins, data_pins, wr_pin):
+        """comment"""
+        if len(addr_pins) != self.ADDR_BITS:
+            raise TypeError("addr_pins must have {} elements".format(self.ADDR_BITS))
+        if len(data_pins) != self.DATA_BITS:
+            raise TypeError("data_pins must have {} elements".format(self.DATA_BITS))
+
+        self._addr_pins = PinBus(addr_pins)
+        self._data_pins = PinBus(data_pins)
+
+        self._wr_pin = digitalio.DigitalInOut(wr_pin)
+        self._wr_pin.switch_to_output()
+
+    def __del__(self):
+        del self._addr_pins
+        del self._data_pins
+        del self._wr_pin
+
+    def __enter__(self):
+        #raise NotImplementedException()
+        return self
+
+    def __exit__(self, a1, a2, a3):
+        #raise NotImplementedException()
+        self.deinit()
+
+    def deinit(self):
+        self._addr_pins.deinit()
+        self._data_pins.deinit()
+        self._wr_pin.deinit()
+
+    def SetChar(self, addr, data):
+        self._addr_pins.value = addr
+        self._wr_pin.value = False
+        self._data_pins.value = data
+        self._wr_pin.value = True
+
+    def SetMessage(self, msg):
+        raise NotImplementedException()
+
+#############################################################################
+
+DATA_PINS = (
+    microcontroller.pin.PA03,
+    microcontroller.pin.PA05,
+    #board.D1,
+)
+
+ADDR_PINS = (
+    microcontroller.pin.PA22,
+    microcontroller.pin.PA23,
+)
+
+WR_PIN = microcontroller.pin.PA07
+
+a = HPDL1414(ADDR_PINS, DATA_PINS, WR_PIN)
+
+print(a)
+print(dir(a))
+print(dir(a._addr_pins))
+print(dir(a._data_pins))
+a.SetChar(1, 0)
+a.deinit()
+print(__version__)
+with HPDL1414(ADDR_PINS, DATA_PINS, WR_PIN) as b:
+    b.SetChar(0, 2)
+print("DONE")
+
+#############################################################################

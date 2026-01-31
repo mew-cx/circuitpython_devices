@@ -1,11 +1,24 @@
-# .gitignore for CircuitPython - mew@mew.cx
+# .gitignore
 
+secrets*
+
+boot_out.txt
 .Trashes
 .fseventsd/
 .metadata_never_index
+
 System Volume Information/
-HIDE/
-*.tmp
+$RECYCLE.BIN/
+__pycache__/
+
+*.log
+*.swp
 *~
+
+HIDE/
+PRINT
+grep_*txt
+REFRESH.sh.bak
+liblist.txt
 
 # eof
