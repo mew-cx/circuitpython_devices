@@ -1,14 +1,14 @@
 hinv version : 0.0.8.0		repo : https://github.com/mew-cx/CircuitPython_hinv
 board.board_id : neopixel_trinkey_m0
 uid : 9b493b6b4c51535020312e37080c17ff
-sys.implementation : (name='circuitpython', version=(9, 2, 9, ''), _machine='Adafruit NeoPixel Trinkey M0 with samd21e18', _mpy=774) MPY_VERSION=6 flags=0x03 arch=0
+sys.implementation : (name='circuitpython', version=(10, 0, 3, ''), _machine='Adafruit NeoPixel Trinkey M0 with samd21e18', _mpy=774, _build='neopixel_trinkey_m0') MPY_VERSION=6 flags=0x03 arch=0
 sys.path : ['', '/', '.frozen', '/lib']
 sys.platform : Atmel SAMD21
-sys.version : 3.4.0; CircuitPython 9.2.9 on 2025-09-07
+sys.version : 3.4.0; CircuitPython 10.0.3 on 2025-10-17
 sys.modules : {'hinv': <module 'hinv' from 'hinv.py'>}
-os.uname() : (sysname='samd21', nodename='samd21', release='9.2.9', version='9.2.9 on 2025-09-07', machine='Adafruit NeoPixel Trinkey M0 with samd21e18')
-memory : 7.0KiB free of 16.8KiB total (41.8%)
-storage : 22.0KiB free of 47.0KiB total (46.8%)
+os.uname() : (sysname='samd21e18', nodename='samd21e18', release='10.0.3', version='10.0.3 on 2025-10-17', machine='Adafruit NeoPixel Trinkey M0 with samd21e18')
+memory : 7.4KiB free of 17.1KiB total (43.1%)
+storage : 20.0KiB free of 47.0KiB total (42.6%)
 len(nvm) : 256
 
 dir(board) :
