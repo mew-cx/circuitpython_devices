@@ -1,0 +1,35 @@
+hinv version : 0.0.8.0		repo : https://github.com/mew-cx/CircuitPython_hinv
+board.board_id : neopixel_trinkey_m0
+uid : 9b493b6b4c51535020312e37080c17ff
+sys.implementation : (name='circuitpython', version=(9, 2, 9, ''), _machine='Adafruit NeoPixel Trinkey M0 with samd21e18', _mpy=774) MPY_VERSION=6 flags=0x03 arch=0
+sys.path : ['', '/', '.frozen', '/lib']
+sys.platform : Atmel SAMD21
+sys.version : 3.4.0; CircuitPython 9.2.9 on 2025-09-07
+sys.modules : {'hinv': <module 'hinv' from 'hinv.py'>}
+os.uname() : (sysname='samd21', nodename='samd21', release='9.2.9', version='9.2.9 on 2025-09-07', machine='Adafruit NeoPixel Trinkey M0 with samd21e18')
+memory : 7.0KiB free of 16.8KiB total (41.8%)
+storage : 22.0KiB free of 47.0KiB total (46.8%)
+len(nvm) : 256
+
+dir(board) :
+['__name__', 'NEOPIXEL', 'TOUCH1', 'TOUCH2', 'board_id']
+
+PinMap() {
+microcontroller.PA03	board.TOUCH1
+microcontroller.PA05	board.NEOPIXEL
+microcontroller.PA07	board.TOUCH2
+microcontroller.PA22
+microcontroller.PA23
+}
+help('modules') {
+__future__        adafruit_hid/mouse                  microcontroller   struct
+__main__          adafruit_pixelbuf micropython       supervisor
+adafruit_hid/__init__               array             neopixel          sys
+adafruit_hid/consumer_control       board             neopixel_write    time
+adafruit_hid/consumer_control_code  builtins          nvm               touchio
+adafruit_hid/keyboard               collections       os                usb_cdc
+adafruit_hid/keyboard_layout_base   digitalio         rainbowio         usb_hid
+adafruit_hid/keyboard_layout_us     gc                random            usb_midi
+adafruit_hid/keycode                math              storage
+Plus any modules on the filesystem
+}
